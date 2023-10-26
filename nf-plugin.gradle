@@ -1,0 +1,10 @@
+ext{
+    nextflowVersion = '23.04.0'
+    github_organization = 'YOUR_GITHUB_ACCOUNT'
+    pluginClassName = 'com.nextflow.plugin.ExamplePlugin'
+}
+
+dependencies {
+    // ADD HERE PLUGINS DEPENDENCIES
+    
+}

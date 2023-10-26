@@ -1,0 +1,12 @@
+plugins {
+    id 'groovy-gradle-plugin'
+    id "io.nextflow.nf-build-plugin" version "1.0.1"
+}
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    implementation 'commons-codec:commons-codec:1.15'
+}

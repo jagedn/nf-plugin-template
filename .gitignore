@@ -1,0 +1,11 @@
+# Ignore Gradle project-specific cache directory
+.gradle
+
+# Ignore Gradle build output directory
+build
+/.idea/
+/.nextflow/
+/example/.nextflow.log
+/example/.nextflow.log.*
+/example/work
+/example/.nextflow
