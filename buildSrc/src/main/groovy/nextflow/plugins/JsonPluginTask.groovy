@@ -1,11 +1,11 @@
 package nextflow.plugins
 
 import groovy.json.JsonOutput
+import org.apache.commons.codec.digest.DigestUtils
 import org.gradle.api.DefaultTask
 import org.gradle.api.GradleException
 import org.gradle.api.file.RegularFileProperty
 import org.gradle.api.provider.Property
-import org.gradle.api.tasks.Input
 import org.gradle.api.tasks.Internal
 import org.gradle.api.tasks.OutputFile
 import org.gradle.api.tasks.TaskAction
@@ -14,12 +14,10 @@ import org.gradle.api.tasks.bundling.Jar
 import java.time.OffsetDateTime
 import java.time.format.DateTimeFormatter
 
-import org.apache.commons.codec.digest.DigestUtils
-
 abstract class JsonPluginTask extends DefaultTask{
 
-    @Input
-    abstract Property<String> getDonwloadUrl()
+    @Internal
+    abstract Property<String> getDownloadUrl()
 
     @Internal
     final abstract RegularFileProperty zipFile =
@@ -39,7 +37,7 @@ abstract class JsonPluginTask extends DefaultTask{
 
 
     protected String resolveURL(){
-        "${donwloadUrl.get()}/${project.version}/${project.name}-${project.version}.zip"
+        "${downloadUrl.get()}/${project.version}/${project.name}-${project.version}.zip"
     }
 
     protected static String now() {

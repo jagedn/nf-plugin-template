@@ -1,11 +1,11 @@
-import nextflow.plugins.JsonPluginTask
-import nextflow.plugins.ZipPluginTask
+import nextflow.plugins.NextflowPlugin
 
 plugins {
     id "java"
     id "groovy"
     id "idea"
 }
+apply plugin: NextflowPlugin
 
 repositories {
     mavenCentral()
@@ -16,30 +16,27 @@ configurations {
     runtimeClasspath.exclude group: 'org.slf4j', module: 'slf4j-api'
 }
 
-// ADD HERE PLUGINS DEPENDENCIES
 apply from:'nf-plugin.gradle'
 
 dependencies {
     // This dependency is exported to consumers, that is to say found on their compile classpath.
-    compileOnly "io.nextflow:nextflow:$nextflowVersion"
+    compileOnly "io.nextflow:nextflow:$nextflowPlugin.nextflowVersion"
     compileOnly 'org.slf4j:slf4j-api:1.7.10'
     compileOnly 'org.pf4j:pf4j:3.4.1'
 
     // test plugin
-    testImplementation "io.nextflow:nextflow:$nextflowVersion"
+    testImplementation "io.nextflow:nextflow:$nextflowPlugin.nextflowVersion"
     testImplementation ("org.spockframework:spock-core:2.2-groovy-3.0") { exclude group: 'org.codehaus.groovy'; exclude group: 'net.bytebuddy' }
     testImplementation ('org.spockframework:spock-junit4:2.2-groovy-3.0') { exclude group: 'org.codehaus.groovy'; exclude group: 'net.bytebuddy' }
 
-    testImplementation(testFixtures("io.nextflow:nextflow:$nextflowVersion"))
-    testImplementation(testFixtures("io.nextflow:nf-commons:$nextflowVersion"))
+    testImplementation(testFixtures("io.nextflow:nextflow:$nextflowPlugin.nextflowVersion"))
+    testImplementation(testFixtures("io.nextflow:nf-commons:$nextflowPlugin.nextflowVersion"))
 }
 
 // use JUnit 5 platform
 test {
     useJUnitPlatform()
 }
-
-version = '0.0.1'
 
 // package
 jar {
@@ -48,16 +45,10 @@ jar {
                 'Manifest-Version':'1.0',
                 'Plugin-Id': project.name,
                 'Plugin-Version': archiveVersion,
-                'Plugin-Class': pluginClassName,
+                'Plugin-Class': nextflowPlugin.pluginClassName,
                 'Plugin-Provider': 'Your organization',
                 'Plugin-Requires': '>=22.10.0',
         )
     }
 }
 
-tasks.register('zipPlugin', ZipPluginTask){
-}
-
-tasks.register('jsonPlugin', JsonPluginTask){
-    donwloadUrl = "https://github.com/${github_organization}/${project.name}/releases/download"
-}
