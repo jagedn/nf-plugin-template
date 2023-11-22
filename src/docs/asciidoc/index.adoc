@@ -1,0 +1,52 @@
+= nf-plugin-template: a Nextflow Plugin Template
+Jorge Aguilera <jagedn@gmail.com>
+v0.0.2
+:toc: left
+
+nf-plugin-template is a gradle template to create Nextflow plugins
+
+You can grab the template from:
+
+https://github.com/jagedn/nf-plugin-template/
+
+== Features
+
+- minimal changes
+- simple structure, oriented to a single plugin
+- gradle 8.4
+- custom Gradle tasks included
+- ready to publish GitHub releases
+- asciidoctor documentation + GitHub Pages
+
+== Steps
+
+- git clone git@github.com:jagedn/nf-plugin-template.git nf-YOUR-PLUGIN
+- edit readme.md
+- change `rootProject.name = 'nf-plugin-template'` in `settings.gradle` with `nf-YOUR-PLUGIN`
+- change `pluginClassName` in `nf-plugin.gradle`
+- rename `ExamplePlugin.groovy` with the plugin name
+- add your custom dependencies in `nf-plugin.gradle`
+
+== Your Plugin
+
+You can/must rename ExamplePlugin with a better name (for example `MyAwesomePlugin`)
+
+You need to create your extensions points and register them in the `src/main/resources/META-INF/extensions.idx`
+
+
+== Tasks
+
+You can find new gradle tasks in `nextflow` group
+
+- `zipPlugin` , compile and package your plugin in a zip file ready to be used by Nextflow
+- `unzipPlugin` , extract the zip file into your $HOME/.nextflow/plugins so you can use it in pipelines
+- `jsonPlugin`, create the json spec required by nextflow to publish a plugin
+
+== Documentation
+
+This template include `asciidoctor` gradle plugin to generate documentation.
+
+You can write your documentation at `src/docs/asciidoc` and run `./gradlew asciidoctor` to build it
+at `build/doc` directory.
+
+Remember to prepare your GitHub repository with GH Pages (go to Settings, Pages and select `GitHub Actions` as source)
