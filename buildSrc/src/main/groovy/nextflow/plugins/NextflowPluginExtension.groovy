@@ -48,7 +48,9 @@ class NextflowPluginExtension {
     }
 
     String getPluginClassName() {
-        return pluginClassName.get()
+        SourcesMatcher matcher = new SourcesMatcher(project)
+        String resolved = matcher.pluginClassName
+        return pluginClassName.getOrElse(resolved)
     }
 
     void setPluginClassName(String pluginClassName){

@@ -1,6 +1,7 @@
 nextflowPlugin{
     githubOrganization = 'YOUR_GITHUB_ACCOUNT'
-    pluginClassName = 'com.nextflow.plugin.ExamplePlugin'
+    // pluginClassName, if not specified, can be calculated by gradle tasks
+    // pluginClassName = 'com.nextflow.plugin.ExamplePlugin'
 }
 
 dependencies {
