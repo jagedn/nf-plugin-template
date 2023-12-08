@@ -18,20 +18,17 @@ In this new repository adjust these files:
 ```
 .nf-plugin.gradle
 
-ext{
-    nextflowVersion = '23.04.0'
-    github_organization = 'YOUR_GITHUB_ACCOUNT'
-    pluginClassName = 'com.nextflow.plugin.ExamplePlugin'
+nextflowPlugin{
+    githubOrganization = 'YOUR_GITHUB_ACCOUNT'    
 }
 ```
 
-`github_organization` is used in case you will publish in GitHub your plugin.
+`githubOrganization` is used in case you will publish in GitHub your plugin.
 
-`pluginClassName` is the package and name of your new plugin (see above)
 
 ### dependencies
 
-Also in this file add your dependencies (probably you will need to adjust several times)
+Also in this file add your dependencies 
 
 For example:
 
