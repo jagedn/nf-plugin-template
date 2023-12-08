@@ -23,21 +23,28 @@ https://github.com/jagedn/nf-plugin-template/
 - git clone git@github.com:jagedn/nf-plugin-template.git nf-YOUR-PLUGIN
 - edit readme.md
 - change `rootProject.name = 'nf-plugin-template'` in `settings.gradle` with `nf-YOUR-PLUGIN`
-- change `pluginClassName` in `nf-plugin.gradle`
+- change `pluginClassName` in `nf-plugin.gradle` (*not required* from version 0.3.0)
 - rename `ExamplePlugin.groovy` with the plugin name
 - add your custom dependencies in `nf-plugin.gradle`
+
+From version 0.3.0 you *don't* need to specify the pluginClassName in the `nextflow`
+closure configuration as the gradle tasks will scan for it
+
+WARNING:: It's better to clone the repo and remove the .git folder instead to fork.
+In this way your plugin will not depend of nf-plugin-template repo.
 
 == Your Plugin
 
 You can/must rename ExamplePlugin with a better name (for example `MyAwesomePlugin`)
 
-You need to create your extensions points and register them in the `src/main/resources/META-INF/extensions.idx`
-
+You *don't* need to create the extensions points file (`src/main/resources/META-INF/extensions.idx`)
+as `registerIdx` task will scan your sources and build it
 
 == Tasks
 
 You can find new gradle tasks in `nextflow` group
 
+- `generateIdx`, scan sources and generate the `extensions.idx` resource
 - `zipPlugin` , compile and package your plugin in a zip file ready to be used by Nextflow
 - `unzipPlugin` , extract the zip file into your $HOME/.nextflow/plugins so you can use it in pipelines
 - `jsonPlugin`, create the json spec required by nextflow to publish a plugin

@@ -17,6 +17,7 @@ class ZipPluginTask extends Jar{
         setGroup('nextflow')
 
         dependsOn(project.tasks.findByName('build'))
+        dependsOn(project.tasks.generateIdx)
 
         into( 'classes',{
             with project.tasks.findByName('jar')
