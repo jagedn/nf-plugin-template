@@ -23,13 +23,11 @@ https://github.com/jagedn/nf-plugin-template/
 INFO:: From version 0.3.0 you *don't* need to specify the pluginClassName in the `nextflow`
 closure configuration as the gradle tasks will scan for it
 
-WARNING:: It's better to clone the repo and remove the .git folder instead to fork.
-In this way your plugin will not depend of nf-plugin-template repo.
-
-- Download and unzip this repository (no clone, only download) in a directory with the name of your new plugin, i.e.
+- Create a new Github project using this template
+- Clone in a directory with the name of your new plugin, i.e.
 `nf-my-awesome-plugin`
 
-- Specify your github account
+- Specify your github account in `nf-plugin.gradle` file
 
 .nf-plugin.gradle
 ----
@@ -38,7 +36,7 @@ nextflowPlugin{
 }
 ----
 
-`githubOrganization` is used in case you will publish in GitHub your plugin.
+`githubOrganization` is used in case you want to publish in GitHub your plugin.
 
 
 - add your dependencies
@@ -56,12 +54,12 @@ dependencies {
 
 - rename ExamplePlugin with a better name (for example `MyAwesomePlugin`)
 
-- delete/rename/update the `ExampleFunctions.groovy` with your exntesions
+- delete/rename/update the `ExampleFunctions.groovy` with your extension
 
 You *don't* need to create the extensions points file (`src/main/resources/META-INF/extensions.idx`)
 as `registerIdx` task will scan your sources and build it
 
-*and this is all*, you can run `./gradlew jsonPlugin` to genrate Nextflow's artifacts
+*and this is all*, you can run `./gradlew jsonPlugin` to generate Nextflow's artifacts
 
 == Tasks
 
@@ -79,4 +77,4 @@ This template include `asciidoctor` gradle plugin to generate documentation.
 You can write your documentation at `src/docs/asciidoc` and run `./gradlew asciidoctor` to build it
 at `build/doc` directory.
 
-Remember to prepare your GitHub repository with GH Pages (go to Settings, Pages and select `GitHub Actions` as source)
+Remember to prepare your GitHub repository with GH Pages (go to Settings, Pages and select `GitHub Actions` as source) and your documentation will be published automagically
