@@ -1,7 +1,14 @@
 nextflowPlugin{
     githubOrganization = 'YOUR_GITHUB_ACCOUNT'
+
     // pluginClassName, if not specified, can be calculated by gradle tasks
     // pluginClassName = 'com.nextflow.plugin.ExamplePlugin'
+
+    // GenerateIdx scan your classes and generate the idx.
+    // In case you want to specify which extensions to use you can use extensionPoints
+    extensionPoints = [
+        // i.e 'com.nextflow.plugin.ExampleFunctions'
+    ]
 }
 
 dependencies {

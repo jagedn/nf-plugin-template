@@ -2,12 +2,17 @@ package nextflow.plugins
 
 import org.gradle.api.DefaultTask
 import org.gradle.api.file.RegularFileProperty
+import org.gradle.api.provider.ListProperty
+import org.gradle.api.provider.Property
+import org.gradle.api.tasks.Internal
 import org.gradle.api.tasks.OutputFile
 import org.gradle.api.tasks.TaskAction
 
 
-class GenerateIdxTask extends DefaultTask{
+abstract class GenerateIdxTask extends DefaultTask{
 
+    @Internal
+    abstract ListProperty<String> extensionPoints
 
     @OutputFile
     final abstract RegularFileProperty outputFile =
@@ -20,13 +25,18 @@ class GenerateIdxTask extends DefaultTask{
 
     @TaskAction
     def runTask() {
-        def matcher = new SourcesMatcher(project)
         def output = outputFile.get().asFile
 
+        if( extensionPoints.getOrElse([]).size() ){
+            output.text = extensionPoints.getOrElse([]).join('\n')
+            return
+        }
+
+        def matcher = new SourcesMatcher(project)
         def extensionsClassName = matcher.pluginExtensions
         def traceClassName = matcher.traceObservers
-
-        output.text = (extensionsClassName+traceClassName).join('\n')
+        def all = extensionsClassName+traceClassName
+        output.text = all.join('\n')
     }
 
 }

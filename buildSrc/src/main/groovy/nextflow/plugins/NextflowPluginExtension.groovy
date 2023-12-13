@@ -1,6 +1,7 @@
 package nextflow.plugins
 
 import org.gradle.api.Project
+import org.gradle.api.provider.ListProperty
 import org.gradle.api.provider.Property
 
 class NextflowPluginExtension {
@@ -13,6 +14,8 @@ class NextflowPluginExtension {
 
     final Property<String> pluginClassName
 
+    final ListProperty<String> extensionPoints
+
     final private Project project
 
     NextflowPluginExtension(Project project){
@@ -21,6 +24,7 @@ class NextflowPluginExtension {
         downloadUrl = project.objects.property(String)
         githubOrganization = project.objects.property(String)
         pluginClassName = project.objects.property(String)
+        extensionPoints = project.objects.listProperty(String)
     }
 
     void setNextflowVersion(String nextflowVersion){
@@ -55,6 +59,10 @@ class NextflowPluginExtension {
 
     void setPluginClassName(String pluginClassName){
         this.pluginClassName.set(pluginClassName)
+    }
+
+    void setExtensionPoints(List<String> extensions){
+        this.extensionPoints.set(extensions)
     }
 
 }

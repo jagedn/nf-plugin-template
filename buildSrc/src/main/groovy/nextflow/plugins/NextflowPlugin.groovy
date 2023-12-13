@@ -18,6 +18,7 @@ class NextflowPlugin implements Plugin<Project>{
             downloadUrl = nextflowPluginExtension.downloadUrl
         })
         target.tasks.register('generateIdx', GenerateIdxTask, {
+            extensionPoints = nextflowPluginExtension.extensionPoints
         })
         target.tasks.findByName("processResources").dependsOn(target.tasks.findByName("generateIdx"))
     }
